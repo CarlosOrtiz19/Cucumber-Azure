@@ -1,24 +1,40 @@
 package com.equipe1.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import java.util.Set;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 @NoArgsConstructor
-public class Etudiant {
+@AllArgsConstructor
+public class Etudiant extends User {
 
-    @Id
-    @GeneratedValue()
-    private Long id;
-
-    private String nom;
-
-    public Etudiant(String nom){
-        this.nom = nom;
+    {
+        this.desc = "Etudiant";
     }
+
+    @NotBlank
+    private String prenom;
+
+    @NotBlank
+    private String matricule;
+
+    @NotBlank
+    private String programme;
+
+    @NotBlank
+    private String adresse;
+
+    private String statutStage;
+
+    @OneToOne
+    private CV cv;
+
+    private boolean enregistre;
 }

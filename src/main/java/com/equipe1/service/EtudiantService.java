@@ -2,40 +2,78 @@ package com.equipe1.service;
 
 import com.equipe1.model.Etudiant;
 import com.equipe1.repository.EtudiantRepository;
-import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class EtudiantService {
 
-    private EtudiantRepository repository;
+    @Autowired
+    private EtudiantRepository etudiantRepository;
 
-    public EtudiantService(EtudiantRepository repository){
-        this.repository = repository;
+    @Autowired
+    private SessionService sessionService;
+
+    public EtudiantService(EtudiantRepository etudiantRepository){
+        this.etudiantRepository = etudiantRepository;
     }
 
-    public Etudiant findEtudiantById(Long idEtudiant){
-        return repository.findById(idEtudiant).orElse(new Etudiant());
+    public List<Etudiant> getEtudiants(){
+        return etudiantRepository.findAll();
     }
 
-    public Etudiant saveEtudiant(Etudiant etudiant) {
-        repository.save(etudiant);
+    public Optional<Etudiant> findEtudiantById(Long idEtudiant){
+        return etudiantRepository.findById(idEtudiant);
+    }
+
+    public Etudiant saveEtudiant(Etudiant etudiant){
+        etudiant.setStatutStage("aucun stage");
+        etudiant = etudiantRepository.save(etudiant);
         return etudiant;
     }
 
-    public Etudiant updateEtudiant(Etudiant etudiant, Long id) {
-        final Optional<Etudiant> etudiantToUpdate = repository.findById(id);
-        etudiantToUpdate.ifPresent(e -> doIt(etudiant, e));
-        final Etudiant etudiantUpdated = etudiantToUpdate.get();
-        etudiantUpdated.setNom(etudiant.getNom());
-        return repository.save(etudiantUpdated);
+    public Etudiant updateEtudiant(Etudiant newEtudiant, long id){
+        Optional<Etudiant> optionalEtudiant = etudiantRepository.findById(id);
+        optionalEtudiant.get().setProgramme(newEtudiant.getProgramme());
+        optionalEtudiant.get().setEmail(newEtudiant.getEmail());
+        optionalEtudiant.get().setTelephone(newEtudiant.getTelephone());
+        optionalEtudiant.get().setAdresse(newEtudiant.getAdresse());
+        optionalEtudiant.get().setCv(newEtudiant.getCv());
+        return etudiantRepository.save(optionalEtudiant.get());
     }
 
-    @SneakyThrows
-    private void doIt(Etudiant etudiant, Etudiant etudiantToUpdate) {
-        if(etudiantToUpdate.getId() != etudiant.getId())
-            throw new Exception("Wrong id");
+    public Optional<Etudiant> findEtudiantByMatricule(String matricule) {
+        return etudiantRepository.findByMatricule(matricule);
+    }
+
+    public Etudiant getEtudiantByEmail(String email){
+        return etudiantRepository.findByEmail(email);
+    }
+
+    public List<Etudiant> getEtudiantsByProgramme(String programme) {
+        return etudiantRepository.findAllByProgramme(programme);
+    }
+
+
+    public Optional<Etudiant> registerEtudiant(long id) {
+        var optionalEtudiant = findEtudiantById(id);
+        if (optionalEtudiant.isPresent()) {
+            var session = sessionService.getCurrent();
+            session.getEtudiants().add(optionalEtudiant.get());
+            sessionService.update(session);
+        }
+        return optionalEtudiant;
+    }
+
+    public boolean isEtudiantRegistered(long id) {
+        var optionalEtudiant = findEtudiantById(id);
+        if (optionalEtudiant.isPresent()) {
+            var session = sessionService.getCurrent();
+            return session.getEtudiants().stream().anyMatch(etudiant -> etudiant.getId() == id);
+        }
+        return false;
     }
 }
