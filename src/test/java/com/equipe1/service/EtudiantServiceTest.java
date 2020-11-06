@@ -38,6 +38,7 @@ public class EtudiantServiceTest {
     @MockBean
     private SessionRepository sessionRepository;
 
+
     private Session session;
     private Etudiant e1;
     private Etudiant e2;
