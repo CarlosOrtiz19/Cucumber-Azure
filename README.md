@@ -57,3 +57,32 @@ Gherkin n'est qu'une façon d'exprimer des exemples de la façon dont vous voule
 Les mots-clés Gherkin Given, When et Then, nous permettent d'exprimer trois composants différents d'un scénario.
 Lorsque nous écrivons la partie Scénario de notre Gherkin, nous devons nous concentrer sur le comportement observable et testable du système que nous construisons.
 
+
+11/6/2020
+References pour configuration de base 
+
+https://www.youtube.com/watch?v=at6kDEwSqwQ (Spanish )
+
+Cucumber con Java Iniciacion
+La video explique la configuration de base pour commencer avec Cucumber: dépendances, annotations, @Given @When @then
+
+https://www.baeldung.com/cucumber-spring-integration
+-Maven dependences 
+-configuration de base
+- configuration  scenario 
+-rest controller
+
+Problems
+io.cucumber.core.exception.CucumberException: 
+
+Classes annotated with @RunWith(Cucumber.class) must not define any
+Step Definition or Hook methods. Their sole purpose is to serve as
+an entry point for JUnit. Step Definitions and Hooks should be defined
+in their own classes. This allows them to be reused across features.
+Offending class: class CucumberTest
+
+https://testingneeds.wordpress.com/tag/cucumberoptions/
+cucumber options
+
+
+
