@@ -28,6 +28,11 @@ public class EmployeurController {
         return employeurService.getEmployeurById(idEmployeur);
     }
 
+    @GetMapping("getById/{id}")
+    public Employeur findEmployeurById(@PathVariable Long id){
+        return employeurService.getEmployeurById(id);
+    }
+
     @GetMapping("email")
     public Employeur getEmployeurByEmail(@RequestParam("email") String email){
         return employeurService.getEmployeurByEmail(email);

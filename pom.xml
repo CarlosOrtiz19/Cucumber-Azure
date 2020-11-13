@@ -24,7 +24,46 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
-		 <!-- cucumber -->
+
+		<!-- test service rest-->
+		<!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>spring-mock-mvc</artifactId>
+			<version>3.3.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>4.2.0</version>
+			<scope>test</scope>
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured-all</artifactId>
+			<version>4.2.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.atlassian.ta</groupId>
+			<artifactId>wiremock-pact-generator</artifactId>
+			<scope>test</scope>
+			<version>2.1.0</version>
+		</dependency>
+		 <!-- cucumber  cucumber jvm deps dependencyXHTML-->
+		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.1</version>
+		</dependency>
+
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-java</artifactId>
@@ -48,13 +87,33 @@
 
 		<!--fin -->
 
-		<!-- WireMock is a library for stubbing and mocking web services. -->
 		<dependency>
-			<groupId>com.github.tomakehurst</groupId>
-			<artifactId>wiremock</artifactId>
-			<version>1.58</version>
-			<scope>test</scope>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.6</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<version>1.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.javafaker</groupId>
+			<artifactId>javafaker</artifactId>
+			<version>0.16</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-contract-wiremock -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-contract-wiremock</artifactId>
+			<version>2.0.1.RELEASE</version>
+		</dependency>
+
+
+
 
 
 		<dependency>
@@ -142,6 +201,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-test</artifactId>
 			<version>2.3.3.RELEASE</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.equipe1</groupId>
+			<artifactId>EQ1-420-565</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

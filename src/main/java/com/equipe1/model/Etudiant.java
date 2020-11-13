@@ -19,6 +19,11 @@ public class Etudiant extends User {
         this.desc = "Etudiant";
     }
 
+    public Etudiant(String prenom, String matricule){
+        this.prenom= prenom;
+        this.matricule= matricule;
+    }
+
     @NotBlank
     private String prenom;
 
