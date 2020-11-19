@@ -30,13 +30,14 @@ public class EtudiantSteps {
     Response response;
 
 
-    /*when()
+
+    @Before
+    public void setUp() throws Exception {
+        /*when()
                 .get("/get/" + id)
                 .then()
                 .body("nom[0]", is("etudiant1"))
             .body("nom[1]", is("etudiant2"));*/
-    @Before
-    public void setUp() throws Exception {
         RestAssuredMockMvc.standaloneSetup(new EtudiantController());
     }
 

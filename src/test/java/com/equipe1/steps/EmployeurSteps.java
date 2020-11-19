@@ -58,13 +58,14 @@ public class EmployeurSteps extends SpringIntegrationTest {
 
     @Given("a employeur exists with an id of {int}")
     public void aEmployeurExistsWithAnIdOf(int id) {
-        response = given().baseUri(basePath).config(config).param("id",id).when().get(basePath +"{id}");
+        //System.out.println(id);
+        //response = given().baseUri(basePath).config(config).param("id",id).when().get(basePath +"{id}");
     }
 
     @When("the client retrieves the employe by id")
     public void theClientRetrievesTheEmployeById() {
-        response = request.when().get(basePath);
-        System.out.println("response: " + response.prettyPrint());
+       // response = request.when().get(basePath);
+       // System.out.println("response: " + response.prettyPrint());
     }
 
     @Then("the emloye service status code is {int}")

@@ -6,4 +6,4 @@ Feature: testing employeur CRUD
     Then the emloye service status code is 200
     And Employee response includes the following in any order
       | employeur.adresse					| 1234abc			|
-      | employeur.nom 				        | Employeur1	|
+      | employeur.nom 				        | Employeur1	  |
