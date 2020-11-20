@@ -155,17 +155,6 @@ public class CandidatureServiceTest {
         Assertions.assertEquals(candidatures.get(0).getStage(), stage);
     }
 
-    @Test
-    public void testUpdateCandidatureApprouve() throws Exception {
-        c1.setId(1L);
-        when(candidatureRepository.save(c1)).thenReturn(c1);
-        candidatureRepository.save(c1);
-        when(candidatureRepository.findById(1L)).thenReturn(Optional.of(c1));
-        when(candidatureRepository.save(c2)).thenReturn(c2);
-        Candidature c3 = candidatureService.updateCandidatureApprouve(c2.getId());
-        // Assert
-        assertEquals(c3.getStatut(), Candidature.CandidatureStatut.APPROUVE);
-    }
 
     @Test
     public void testUpdateCandidatureChoisi() {

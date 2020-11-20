@@ -111,9 +111,9 @@ public class StageService {
     }
 
     public Stage updateEtudiantsAdmits(long stageId, Set<Etudiant> etudiants) {
-        var optionnalStage = stageRepository.findById(stageId);
+        Optional<Stage> optionnalStage = stageRepository.findById(stageId);
         if (optionnalStage.isPresent()) {
-            var stage = optionnalStage.get();
+            Stage stage = optionnalStage.get();
             stage.setEtudiantsAdmits(etudiants);
             return stageRepository.save(stage);
         } else
@@ -125,7 +125,7 @@ public class StageService {
     public Set<Etudiant> getEtudiantsAdmits(long stageId) {
         Optional<Stage> optionnalStage = stageRepository.findById(stageId);
         if (optionnalStage.isPresent()) {
-            var stage = optionnalStage.get();
+            Stage stage = optionnalStage.get();
             return stage.getEtudiantsAdmits();
         } else
             return null;

@@ -16,6 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -55,7 +56,7 @@ public class CVServiceTest {
         System.out.println(cv1);
         when(cvRepository.findAll()).thenReturn(Arrays.asList(cv1, cv2, cv3));
 
-        var cvs = cvService.getCVs();
+        List<CV> cvs = cvService.getCVs();
 
         assertEquals(cvs.size(), 3);
     }
@@ -64,7 +65,7 @@ public class CVServiceTest {
     public void testGetCVById_ValidId() {
         when(cvRepository.findById(101L)).thenReturn(Optional.of(cv1));
 
-        var cv = cvService.getCVById(101L);
+        CV cv = cvService.getCVById(101L);
 
         assertEquals(cv1, cv);
     }
@@ -75,7 +76,7 @@ public class CVServiceTest {
         boolean wentInCatchBlock;
 
         try {
-            var cv = cvService.getCVById(101L);
+            CV cv = cvService.getCVById(101L);
             wentInCatchBlock = false;
         } catch (ResponseStatusException e){
            wentInCatchBlock = true;
@@ -89,7 +90,7 @@ public class CVServiceTest {
         etudiant1.setCv(cv1);
         when(etudiantRepository.findById(100L)).thenReturn(Optional.of(etudiant1));
 
-        var cv = cvService.getCVByEtudiantId(100L);
+        CV cv = cvService.getCVByEtudiantId(100L);
 
         assertEquals(cv, cv1);
     }
@@ -113,7 +114,7 @@ public class CVServiceTest {
     public void testSaveCV() {
         when(cvRepository.saveAndFlush(cv1)).thenReturn(cv1);
 
-        var cv = cvService.saveCV(cv1);
+        CV cv = cvService.saveCV(cv1);
 
         assertEquals(cv, cv1);
     }
@@ -122,7 +123,7 @@ public class CVServiceTest {
     public void testSaveEtudiantCV_ValidId() {
         when(etudiantRepository.findById(100L)).thenReturn(Optional.of(etudiant1));
 
-        var cv = cvService.saveEtudiantCV(100L, cv1);
+        CV cv = cvService.saveEtudiantCV(100L, cv1);
 
         assertEquals(cv, etudiant1.getCv());
     }
@@ -174,7 +175,7 @@ public class CVServiceTest {
     public void testUpdateCV() {
         when(cvRepository.saveAndFlush(cv1)).thenReturn(cv1);
 
-        var cv = cvService.updateCV(cv1, 1L);
+        CV cv = cvService.updateCV(cv1, 1L);
 
         assertEquals(cv1.getId(), 1L);
     }

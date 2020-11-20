@@ -1,6 +1,7 @@
 package com.equipe1.service;
 
 import com.equipe1.model.Etudiant;
+import com.equipe1.model.Session;
 import com.equipe1.repository.EtudiantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,9 +60,9 @@ public class EtudiantService {
 
 
     public Optional<Etudiant> registerEtudiant(long id) {
-        var optionalEtudiant = findEtudiantById(id);
+        Optional<Etudiant> optionalEtudiant = findEtudiantById(id);
         if (optionalEtudiant.isPresent()) {
-            var session = sessionService.getCurrent();
+            Session session = sessionService.getCurrent();
             session.getEtudiants().add(optionalEtudiant.get());
             sessionService.update(session);
         }
@@ -69,9 +70,9 @@ public class EtudiantService {
     }
 
     public boolean isEtudiantRegistered(long id) {
-        var optionalEtudiant = findEtudiantById(id);
+        Optional<Etudiant> optionalEtudiant = findEtudiantById(id);
         if (optionalEtudiant.isPresent()) {
-            var session = sessionService.getCurrent();
+            Session session = sessionService.getCurrent();
             return session.getEtudiants().stream().anyMatch(etudiant -> etudiant.getId() == id);
         }
         return false;
