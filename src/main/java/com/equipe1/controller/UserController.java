@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -25,19 +26,21 @@ public class UserController {
 
     @GetMapping("/get/{email}/{password}")
     public User getUser(@PathVariable String email, @PathVariable String password){
-        var optionalUser = userRepository.findByEmail(email);
-        if (optionalUser.isEmpty())
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        if (!optionalUser.isPresent())
             return null;
-        var user = optionalUser.get();
+        User user = optionalUser.get();
         return user.getPassword().equals(password) ? user: null;
     }
 
     @GetMapping("/get/{email}")
     public User getUserByEmail(@PathVariable String email){
-        var optionalUser = userRepository.findByEmail(email);
-        if (optionalUser.isEmpty())
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        if (!optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            return user.getEmail().equals(email) ? user : null;
+        } else {
             return null;
-        var user = optionalUser.get();
-        return user.getEmail().equals(email) ? user: null;
+        }
     }
 }

@@ -11,11 +11,12 @@
 	<groupId>com.equipe1</groupId>
 	<artifactId>EQ1-420-565</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>EQ1-420-565</name>
 	<description>Projet stage etudiant</description>
 
 	<properties>
-		<java.version>11</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 
 	<dependencies>

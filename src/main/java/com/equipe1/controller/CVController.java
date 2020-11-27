@@ -34,7 +34,7 @@ public class CVController {
 
     @PutMapping("/create/{idEtudiant}")
     public CV saveCV(@RequestParam("file") MultipartFile file, @PathVariable Long idEtudiant) throws IOException {
-        var cv = new CV();
+        CV cv = new CV();
         cv.setId(idEtudiant);
         cv.setData(file.getBytes());
         cv.setName(file.getOriginalFilename());

@@ -46,11 +46,11 @@ public class Application {
 
     void insertBootSession() {
         if (sessionService.getAll().isEmpty()) {
-            var today = LocalDate.now();
+            LocalDate today = LocalDate.now();
             int month = today.getMonthValue() > 6 ? 7 : 1;
-            var startDate = LocalDate.of(today.getYear(), month, 1);
+            LocalDate startDate = LocalDate.of(today.getYear(), month, 1);
 
-            var session = Session.builder()
+            Session session = Session.builder()
                     .startDate(startDate)
                     .endDate(startDate.plusMonths(6))
                     .etudiants(new HashSet<>())
@@ -72,7 +72,7 @@ public class Application {
     }
 
     void updateSessionTask() {
-        var session = Session.builder()
+        Session session = Session.builder()
                 .startDate(LocalDate.now())
                 .endDate(LocalDate.now().plusMonths(6))
                 .etudiants(new HashSet<>())

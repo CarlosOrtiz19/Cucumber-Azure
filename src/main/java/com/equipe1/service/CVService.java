@@ -35,7 +35,7 @@ public class CVService {
     }
 
     public CV getCVByEtudiantId(long id) {
-        var etudiant = etudiantRepository.findById(id)
+        Etudiant etudiant = etudiantRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Invalid CV id %s", id)));
         return etudiant.getCv();
     }
